@@ -1,0 +1,20 @@
+{
+  "name": "exporter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf build && bun x prisma generate && bun x next build && cp -r ./.next/standalone ./build && cp -r ./.next/static ./build/.next/",
+    "lint": "next lint",
+    "dev": "bun run src/index.ts"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "eslint": "^8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
+
