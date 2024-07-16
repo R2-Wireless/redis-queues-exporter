@@ -4,17 +4,27 @@
   "private": true,
   "scripts": {
     "build": "rm -rf build && bun x prisma generate && bun x next build && cp -r ./.next/standalone ./build && cp -r ./.next/static ./build/.next/",
-    "lint": "next lint",
-    "dev": "bun run src/index.ts"
+    "format": "prettier --write \"src/*.ts\"",
+    "format:check": "prettier --check \"src/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/*.ts\"",
+    "dev": "bun run src/start.ts"
   },
   "dependencies": {
-
+    "ioredis": "^5.4.1"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "eslint": "^8",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-airbnb-typescript": "^10.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-prettier": "^3.1.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.0.0"
+    "prettier": "^2.1.2",
+    "typescript": "^4.7.4"
   }
 }
-
