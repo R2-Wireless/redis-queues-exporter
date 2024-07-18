@@ -19,7 +19,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./exporter
-          file: ./Dockerfile
           push: true
           tags: r2wireless/redis-queues-exporter:master
         
