@@ -14,5 +14,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/redis-queues-exporter:master
+      - name: Push 
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/redis-queues-exporter:master
         
