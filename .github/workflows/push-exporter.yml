@@ -19,6 +19,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./exporter
+          platforms: linux/arm64
           push: true
           tags: r2wireless/redis-queues-exporter:master
         
