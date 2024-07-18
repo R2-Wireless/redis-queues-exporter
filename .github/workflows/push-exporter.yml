@@ -9,11 +9,17 @@ jobs:
       run:
         working-directory: ./exporter
     steps:
+      - uses: actions/checkout@v2
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: r2wireless
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Push 
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/redis-queues-exporter:master
+        uses: docker/build-push-action@v5
+        with:
+          context: ./exporter
+          file: ./Dockerfile
+          push: true
+          tags: r2wireless/redis-queues-exporter:master
         
