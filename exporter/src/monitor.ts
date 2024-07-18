@@ -3,7 +3,7 @@ import { Context } from "./context";
 
 const getAllQueues: (ctx: Context) => Promise<String[]> = async (ctx) => {
   let cursor = "0";
-  const queueNames: String[] = [];
+  const queueNames: string[] = [];
   do {
     const res = await ctx.redis.scan(cursor, "COUNT", 100);
     cursor = res[0];
@@ -28,15 +28,22 @@ export const getQueueNames = async (ctx: Context) => {
   await ctx.redis.set("all_queue_names", JSON.stringify(queueNames), "EX", 5);
 };
 
-export const monitorQueues = async (ctx: Context) => {
+export const monitorQueues: (
+  ctx: Context
+) => Promise<{ name: string; size: number }[]> = async (ctx) => {
   const redisQueueNames = await ctx.redis.get("all_queue_names");
-  const queueNames: String[] = redisQueueNames
+  const queueNames: string[] = redisQueueNames
     ? JSON.parse(redisQueueNames)
     : [];
-  await Promise.all(
+  const queueSizes = await Promise.all(
     queueNames.map(async (queueName) => {
       const queueSize = await ctx.redis.llen(queueName as RedisKey);
       console.log(`Queue ${queueName}, with size of ${queueSize}`);
+      return {
+        name: JSON.parse(queueName).join('_'),
+        size: queueSize,
+      };
     })
   );
+  return queueSizes;
 };
