@@ -1,0 +1,23 @@
+name: Test exporter
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./exporter
+    steps:
+      - uses: actions/checkout@v2
+      - uses: oven-sh/setup-bun@v2
+      - name: Install
+        run: bun install
+      - name: Format
+        run: bun format
+      - name: Lint
+        run: bun lint
+      - name: Typecheck
+        run: bun typecheck
+      - name: Test
+        run: make test

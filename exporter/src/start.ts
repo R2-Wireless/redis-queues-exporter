@@ -14,7 +14,7 @@ const start = async () => {
   const monitorIntervalPromise = setIntervalPromise(async () => {
     const queueSizes = await monitorQueues(ctx);
     let massage = "";
-    queueSizes.map((x) => {
+    queueSizes.forEach((x) => {
       massage += `${x.name} ${x.size}\n`;
     });
     fetch(`${prometheusUrl}/${prometheusJobName}`, {

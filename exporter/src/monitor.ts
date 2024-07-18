@@ -1,19 +1,20 @@
+/* eslint-disable no-await-in-loop */
 import { RedisKey } from "ioredis";
 import { Context } from "./context";
 
-const getAllQueues: (ctx: Context) => Promise<String[]> = async (ctx) => {
+const getAllQueues: (ctx: Context) => Promise<string[]> = async (ctx) => {
   let cursor = "0";
   const queueNames: string[] = [];
   do {
     const res = await ctx.redis.scan(cursor, "COUNT", 100);
-    cursor = res[0];
-    const keys = res[1];
+    const [cursorRes, keys] = res;
     for (let i = 0; i < keys.length; i += 1) {
       const type = await ctx.redis.type(keys[i]);
       if (type === "list") {
         queueNames.push(keys[i]);
       }
     }
+    cursor = cursorRes;
   } while (cursor !== "0");
   return queueNames;
 };
