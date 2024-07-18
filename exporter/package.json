@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf build && bun x prisma generate && bun x next build && cp -r ./.next/standalone ./build && cp -r ./.next/static ./build/.next/",
     "format": "prettier --write \"src/*.ts\"",
     "format:check": "prettier --check \"src/*.ts\"",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"src/*.ts\"",
-    "dev": "bun run src/start.ts"
+    "start": "bun run src/start.ts"
   },
   "dependencies": {
     "ioredis": "^5.4.1"

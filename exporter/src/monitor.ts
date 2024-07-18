@@ -40,7 +40,7 @@ export const monitorQueues: (
       const queueSize = await ctx.redis.llen(queueName as RedisKey);
       console.log(`Queue ${queueName}, with size of ${queueSize}`);
       return {
-        name: JSON.parse(queueName).join('_'),
+        name: JSON.parse(queueName).join("_"),
         size: queueSize,
       };
     })
