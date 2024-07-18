@@ -20,4 +20,4 @@ jobs:
       - name: Typecheck
         run: bun typecheck
       - name: Test
-        run: make test
+        run: bun test
