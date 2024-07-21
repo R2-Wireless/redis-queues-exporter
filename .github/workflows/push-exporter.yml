@@ -3,6 +3,20 @@ name: Push exporter
 on: [push]
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: npm install
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
   push-docker:
     runs-on: ubuntu-20.04
     defaults:
@@ -10,6 +24,8 @@ jobs:
         working-directory: ./exporter
     steps:
       - uses: actions/checkout@v2
+      - name: Get version
+        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -23,5 +39,5 @@ jobs:
           context: ./exporter
           platforms: linux/arm64
           push: true
-          tags: r2wireless/redis-queues-exporter:master
+          tags: r2wireless/redis-queues-exporter:${{ env.VERSION }}
         
