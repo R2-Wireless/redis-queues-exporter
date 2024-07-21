@@ -3,6 +3,16 @@
 
 ### Bug Fixes
 
+* Another ([1e3c784](https://github.com/R2-Wireless/redis-queues-exporter/commit/1e3c784422e843e106c8418521163cf463f0cedb))
+* Another ([86d3afa](https://github.com/R2-Wireless/redis-queues-exporter/commit/86d3afa1ef21a7a2165356a4fd206b9b752e5ef1))
+* Another ([9cbb70c](https://github.com/R2-Wireless/redis-queues-exporter/commit/9cbb70c247a22d08e2cc14242b512fa4236e3358))
+* new patch ([f9b9387](https://github.com/R2-Wireless/redis-queues-exporter/commit/f9b9387991f188de6c4f82a952419158f2264c80))
+
+## [1.0.2](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.1...v1.0.2) (2024-07-21)
+
+
+### Bug Fixes
+
 * Another ([86d3afa](https://github.com/R2-Wireless/redis-queues-exporter/commit/86d3afa1ef21a7a2165356a4fd206b9b752e5ef1))
 * Another ([9cbb70c](https://github.com/R2-Wireless/redis-queues-exporter/commit/9cbb70c247a22d08e2cc14242b512fa4236e3358))
 * new patch ([f9b9387](https://github.com/R2-Wireless/redis-queues-exporter/commit/f9b9387991f188de6c4f82a952419158f2264c80))
