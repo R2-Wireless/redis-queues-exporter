@@ -20,6 +20,10 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Install dependencies
         run: bun install
+      # Semantic release requires node to be installed
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
