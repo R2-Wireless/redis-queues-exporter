@@ -6,9 +6,9 @@
       "@semantic-release/changelog",
       "@semantic-release/git",
       [
-        "@semantic-release/exec",
+        "@semantic-release/npm",
         {
-          "prepareCmd": "echo ${nextRelease.version} > VERSION"
+          "npmPublish": false
         }
       ]
     ]
