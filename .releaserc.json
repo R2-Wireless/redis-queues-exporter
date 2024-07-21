@@ -22,12 +22,7 @@
           "{{major}}.{{minor}}"
         ],
         "dockerPlatform": ["linux/amd64", "linux/arm64"],
-        "dockerBuildFlags": {
-          "pull": null,
-          "target": "release"
-        },
         "dockerArgs": {
-          "GITHUB_TOKEN": null,
           "RELEASE_VERSION": "{{next.version}}"
         }
       }
