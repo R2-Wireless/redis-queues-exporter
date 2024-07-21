@@ -1,5 +1,5 @@
 import { createContext } from "./context";
-import { prometheusJobName, prometheusUrl } from "./env";
+import { monitoredDbName, prometheusUrl } from "./env";
 import { monitorQueues, getQueueNames } from "./monitor";
 import { setIntervalPromise } from "./utils";
 
@@ -15,9 +15,9 @@ const start = async () => {
     const queueSizes = await monitorQueues(ctx);
     let massage = "";
     queueSizes.forEach((x) => {
-      massage += `${x.name} ${x.size}\n`;
+      massage += `${x.name}{monitored_db_name="${monitoredDbName}"} ${x.size}\n`;
     });
-    fetch(`${prometheusUrl}/${prometheusJobName}`, {
+    fetch(`${prometheusUrl}/redis-queues`, {
       method: "POST",
       body: massage,
       headers: {
