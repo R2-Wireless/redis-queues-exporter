@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.3...v1.0.4) (2024-07-21)
+
+
+### Bug Fixes
+
+* add label to metrics ([b047421](https://github.com/R2-Wireless/redis-queues-exporter/commit/b04742162938fb75ef42c84b704550ab4d310410))
+* empty ([cbe1939](https://github.com/R2-Wireless/redis-queues-exporter/commit/cbe1939cf3f86ebdd7e067aba6cc32df0c62bc20))
+
 ## [1.0.3](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.2...v1.0.3) (2024-07-21)
 
 
