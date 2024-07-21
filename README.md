@@ -1,1 +1,1 @@
-# [redis-queues-exporter](https://hub.docker.com/r/r2wireless/redis-queues-exporter)
+# redis-queues-exporter ![Docker Image Version](https://img.shields.io/docker/v/r2wireless/redis-queues-exporter)
