@@ -14,7 +14,7 @@
     [
       "@codedependant/semantic-release-docker",
       {
-        "dockerImage": "{{env.DOCKER_REGISTRY_USER}}/redis-queues-exporter",
+        "dockerImage": "r2wireless/redis-queues-exporter",
         "dockerTags": [
           "latest",
           "{{version}}",
