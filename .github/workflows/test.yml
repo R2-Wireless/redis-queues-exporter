@@ -1,16 +1,15 @@
-name: Test exporter
+name: Test
 
 on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: ./exporter
     steps:
       - uses: actions/checkout@v2
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: v1.1.20
       - name: Install
         run: bun install
       - name: Format
