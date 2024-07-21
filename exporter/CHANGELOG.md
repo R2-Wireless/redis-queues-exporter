@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/R2-Wireless/redis-monitoring/compare/v1.0.0...v1.0.1) (2024-07-21)
+
+
+### Bug Fixes
+
+* try again ([fedea87](https://github.com/R2-Wireless/redis-monitoring/commit/fedea8752c8f44559cffd82372b0c0de34d254d1))
+
 # 1.0.0 (2024-07-21)
 
 
