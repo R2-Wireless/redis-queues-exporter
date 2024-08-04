@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.4...v1.0.5) (2024-08-04)
+
+
+### Bug Fixes
+
+* better names ([#1](https://github.com/R2-Wireless/redis-queues-exporter/issues/1)) ([4d6b550](https://github.com/R2-Wireless/redis-queues-exporter/commit/4d6b550662cfd0e1e85b5657a1d22f5f168f56f6))
+
 ## [1.0.4](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.3...v1.0.4) (2024-07-21)
 
 
