@@ -20,9 +20,11 @@ const start = async () => {
           (x) =>
             `redis_queues${
               monitoredDbName !== undefined ? `_${monitoredDbName}` : ""
-            }{instance="${x.name}",monitored_db_name="${monitoredDbName}"} ${
-              x.size
-            }`
+            }{instance="${x.name}"${
+              monitoredDbName !== undefined
+                ? `,monitored_db_name="${monitoredDbName}"`
+                : ""
+            }} ${x.size}`
         )
         .join("\n")}
 `,
