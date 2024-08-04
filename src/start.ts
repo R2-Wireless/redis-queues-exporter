@@ -13,13 +13,19 @@ const start = async () => {
   );
   const monitorIntervalPromise = setIntervalPromise(async () => {
     const queueSizes = await monitorQueues(ctx);
-    let massage = "";
-    queueSizes.forEach((x) => {
-      massage += `${x.name}{monitored_db_name="${monitoredDbName}"} ${x.size}\n`;
-    });
-    fetch(`${prometheusUrl}/redis-queues`, {
+    fetch(`${prometheusUrl}/redis_queues`, {
       method: "POST",
-      body: massage,
+      body: `${queueSizes
+        .map(
+          (x) =>
+            `redis_queues${
+              monitoredDbName !== undefined ? `_${monitoredDbName}` : ""
+            }{instance="${x.name}",monitored_db_name="${monitoredDbName}"} ${
+              x.size
+            }`
+        )
+        .join("\n")}
+`,
       headers: {
         "Content-Type": "application/json",
       },

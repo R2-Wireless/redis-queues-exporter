@@ -40,8 +40,14 @@ export const monitorQueues: (
     queueNames.map(async (queueName) => {
       const queueSize = await ctx.redis.llen(queueName as RedisKey);
       console.log(`Queue ${queueName}, with size of ${queueSize}`);
+      let name = queueName;
+      try {
+        name = JSON.parse(queueName).join("_");
+      } catch (error) {
+        console.log(`using unparsed name for ${name}`);
+      }
       return {
-        name: JSON.parse(queueName).join("_"),
+        name,
         size: queueSize,
       };
     })
