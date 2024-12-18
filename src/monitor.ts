@@ -2,6 +2,22 @@
 import { RedisKey } from "ioredis";
 import { Context } from "./context";
 
+const parseQueueName = (item: any): string => {
+  if (item === null) {
+    return "";
+  }
+  if (Array.isArray(item)) {
+    return item.map((i) => parseQueueName(i)).join("_");
+  }
+  if (typeof item === "object" && item !== null) {
+    return Object.entries(item)
+      .map(([k, v]) => (v === null ? "" : `${k}_${v}`))
+      .filter(Boolean)
+      .join("_");
+  }
+  return item;
+};
+
 const getAllQueues: (ctx: Context) => Promise<string[]> = async (ctx) => {
   let cursor = "0";
   const queueNames: string[] = [];
@@ -42,7 +58,7 @@ export const monitorQueues: (
       console.log(`Queue ${queueName}, with size of ${queueSize}`);
       let name = queueName;
       try {
-        name = JSON.parse(queueName).join("_");
+        name = parseQueueName(JSON.parse(queueName));
       } catch (error) {
         console.log(`using unparsed name for ${name}`);
       }
