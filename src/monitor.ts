@@ -3,8 +3,6 @@ import { RedisKey } from "ioredis";
 import { Context } from "./context";
 import { logger } from "./utils/logger";
 
-export const QUEUE_NAMES_TTL_SEC = 20;
-
 const parseQueueName = (item: any): string => {
   if (item === null) {
     return "";
@@ -52,12 +50,7 @@ export const getQueueNames = async (ctx: Context) => {
   logger.info(
     `Finish get all queue names, duration: ${Date.now() - startTime} ms`
   );
-  await ctx.redis.set(
-    ALL_QUEUE_NAMES_REDIS_KEY,
-    JSON.stringify(queueNames),
-    "EX",
-    QUEUE_NAMES_TTL_SEC
-  );
+  await ctx.redis.set(ALL_QUEUE_NAMES_REDIS_KEY, JSON.stringify(queueNames));
 };
 
 export const monitorQueues: (
