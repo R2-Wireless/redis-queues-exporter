@@ -1,2 +1,8 @@
 node_modules
 package-lock.json
+*.egg-info
+__pycache__
+.pytest_cache
+.mypy_cache
+.DS_Store
+.idea
