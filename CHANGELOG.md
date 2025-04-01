@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.8...v1.0.9) (2025-04-01)
+
+
+### Bug Fixes
+
+* improve logs ([b91f474](https://github.com/R2-Wireless/redis-queues-exporter/commit/b91f474885d42469b5c14da42b3458b48edca285))
+
 ## [1.0.8](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.7...v1.0.8) (2025-04-01)
 
 
