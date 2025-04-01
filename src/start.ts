@@ -15,6 +15,7 @@ const start = async () => {
   );
   const monitorIntervalPromise = setIntervalPromise(async () => {
     const queueSizes = await monitorQueues(ctx);
+    logger.info(`Queue names and sizes: ${JSON.stringify(queueSizes)}`);
     fetch(`${prometheusUrl}/redis_queues`, {
       method: "POST",
       body: `${queueSizes

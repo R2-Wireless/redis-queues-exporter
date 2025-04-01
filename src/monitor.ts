@@ -44,9 +44,9 @@ const getAllQueues: (ctx: Context) => Promise<string[]> = async (ctx) => {
 export const getQueueNames = async (ctx: Context) => {
   const startTime = Date.now();
   const queueNames = await getAllQueues(ctx);
-  logger.info(queueNames);
+  logger.info(`Queue names: ${queueNames}`);
   logger.info(
-    `Finish get all queue names, that took ${Date.now() - startTime} ms`
+    `Finish get all queue names, duration: ${Date.now() - startTime} ms`
   );
   await ctx.redis.set("all_queue_names", JSON.stringify(queueNames), "EX", 5);
 };
@@ -54,6 +54,8 @@ export const getQueueNames = async (ctx: Context) => {
 export const monitorQueues: (
   ctx: Context
 ) => Promise<{ name: string; size: number }[]> = async (ctx) => {
+  const startTime = Date.now();
+  logger.info(`Starting monitor queues`);
   const redisQueueNames = await ctx.redis.get("all_queue_names");
   const queueNames: string[] = redisQueueNames
     ? JSON.parse(redisQueueNames)
@@ -62,13 +64,16 @@ export const monitorQueues: (
   queueNames.forEach((name) => pipeline.llen(name as RedisKey));
   const sizes = await pipeline.exec();
 
+  logger.info(
+    `Finished monitor queues. duration: ${Date.now() - startTime} ms`
+  );
   return queueNames.map((queueName, index) => {
     const [err, size] = sizes?.[index] ?? [];
     let name = queueName;
     try {
       name = parseQueueName(JSON.parse(queueName));
     } catch {
-      logger.info(`Using unparsed name for ${queueName}`);
+      logger.warn(`Using unparsed name for ${queueName}`);
     }
     return {
       name,
