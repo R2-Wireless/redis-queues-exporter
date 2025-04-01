@@ -1,8 +1,10 @@
 import { createContext } from "./context";
 import { monitoredDbName, prometheusUrl } from "./env";
-import { monitorQueues, getQueueNames } from "./monitor";
+import { monitorQueues, getQueueNames, QUEUE_NAMES_TTL_SEC } from "./monitor";
 import { setIntervalPromise } from "./utils";
 import { logger } from "./utils/logger";
+
+const QUEUE_NAMES_INTERVAL_MS = (QUEUE_NAMES_TTL_SEC / 2) * 1000;
 
 const start = async () => {
   logger.info("Starting redis queues exporter service...");
@@ -41,7 +43,7 @@ const start = async () => {
           logger.error(`Error: ${err}`);
         }
       });
-  }, 10_000);
+  }, QUEUE_NAMES_INTERVAL_MS);
   await Promise.race([
     await getNamesIntervalPromise.promise,
     await monitorIntervalPromise.promise,
