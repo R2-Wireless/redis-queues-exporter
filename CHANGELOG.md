@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.10...v1.0.11) (2025-04-01)
+
+
+### Bug Fixes
+
+* remove ttl ([921dce9](https://github.com/R2-Wireless/redis-queues-exporter/commit/921dce9336b143badb11dd9d7f340a6fd00de674))
+
 ## [1.0.10](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.9...v1.0.10) (2025-04-01)
 
 
