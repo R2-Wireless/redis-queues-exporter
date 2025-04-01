@@ -2,9 +2,10 @@ import { createContext } from "./context";
 import { monitoredDbName, prometheusUrl } from "./env";
 import { monitorQueues, getQueueNames } from "./monitor";
 import { setIntervalPromise } from "./utils";
+import { logger } from "./utils/logger";
 
 const start = async () => {
-  console.log("start...");
+  logger.info("Starting redis queues exporter service...");
   const ctx = await createContext();
 
   const getNamesIntervalPromise = setIntervalPromise(
@@ -35,7 +36,7 @@ const start = async () => {
       .then((res) => res.text())
       .then((err) => {
         if (err.length > 0) {
-          console.error(`Error: ${err}`);
+          logger.error(`Error: ${err}`);
         }
       });
   }, 1_000);
@@ -47,7 +48,7 @@ const start = async () => {
   clearInterval(getNamesIntervalPromise.interval);
   clearInterval(monitorIntervalPromise.interval);
   ctx.redis.disconnect();
-  console.log("finish...");
+  logger.info("Stopping redis queues exporter service...");
 };
 
 start().then(
@@ -55,7 +56,9 @@ start().then(
     process.exit(0);
   },
   (err) => {
-    console.error(err);
+    logger.error(
+      `Failed to start redis queues exporter service with error:  ${err}`
+    );
     process.exit(1);
   }
 );

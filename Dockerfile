@@ -7,5 +7,5 @@ RUN bun install --frozen-lockfile
 COPY . .
 
 ENV NODE_ENV production
-
+ENV LOG_LEVEL=info
 CMD [ "bun", "start" ]

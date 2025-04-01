@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { RedisKey } from "ioredis";
 import { Context } from "./context";
+import { logger } from "./utils/logger";
 
 const parseQueueName = (item: any): string => {
   if (item === null) {
@@ -9,7 +10,7 @@ const parseQueueName = (item: any): string => {
   if (Array.isArray(item)) {
     return item.map((i) => parseQueueName(i)).join("_");
   }
-  if (typeof item === "object" && item !== null) {
+  if (typeof item === "object") {
     return Object.entries(item)
       .map(([k, v]) => (v === null ? "" : `${k}_${v}`))
       .filter(Boolean)
@@ -38,9 +39,9 @@ const getAllQueues: (ctx: Context) => Promise<string[]> = async (ctx) => {
 export const getQueueNames = async (ctx: Context) => {
   const startTime = Date.now();
   const queueNames = await getAllQueues(ctx);
-  console.log(queueNames);
-  console.log(
-    `Finish get all queue names, that took ${Date.now() - startTime}ms`
+  logger.info(queueNames);
+  logger.info(
+    `Finish get all queue names, that took ${Date.now() - startTime} ms`
   );
   await ctx.redis.set("all_queue_names", JSON.stringify(queueNames), "EX", 5);
 };
@@ -55,12 +56,12 @@ export const monitorQueues: (
   const queueSizes = await Promise.all(
     queueNames.map(async (queueName) => {
       const queueSize = await ctx.redis.llen(queueName as RedisKey);
-      console.log(`Queue ${queueName}, with size of ${queueSize}`);
+      logger.info(`Queue ${queueName}, with size of ${queueSize}`);
       let name = queueName;
       try {
         name = parseQueueName(JSON.parse(queueName));
       } catch (error) {
-        console.log(`using unparsed name for ${name}`);
+        logger.info(`using unparsed name for ${name}`);
       }
       return {
         name,
