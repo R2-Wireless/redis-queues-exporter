@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.9...v1.0.10) (2025-04-01)
+
+
+### Bug Fixes
+
+* increase redis queue names ttl ([58ee323](https://github.com/R2-Wireless/redis-queues-exporter/commit/58ee32321de04db3e5d8c70778e62be8c68b7166))
+
 ## [1.0.9](https://github.com/R2-Wireless/redis-queues-exporter/compare/v1.0.8...v1.0.9) (2025-04-01)
 
 
