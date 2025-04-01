@@ -4,13 +4,16 @@ import { monitorQueues, getQueueNames } from "./monitor";
 import { setIntervalPromise } from "./utils";
 import { logger } from "./utils/logger";
 
+const TIMEOUT_MINUTES = 5 * 60 * 1000;
+const TIMEOUT_SEC = 10_000;
+
 const start = async () => {
   logger.info("Starting redis queues exporter service...");
   const ctx = await createContext();
 
   const getNamesIntervalPromise = setIntervalPromise(
     () => getQueueNames(ctx),
-    3_000
+    TIMEOUT_MINUTES
   );
   const monitorIntervalPromise = setIntervalPromise(async () => {
     const queueSizes = await monitorQueues(ctx);
@@ -39,7 +42,7 @@ const start = async () => {
           logger.error(`Error: ${err}`);
         }
       });
-  }, 1_000);
+  }, TIMEOUT_SEC);
   await Promise.race([
     await getNamesIntervalPromise.promise,
     await monitorIntervalPromise.promise,
